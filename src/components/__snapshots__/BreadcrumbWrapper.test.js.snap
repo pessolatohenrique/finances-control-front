@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadcrumbWrapper should generate snapshot 1`] = `
+<nav
+  aria-label="breadcrumb"
+  class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root"
+>
+  <ol
+    class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+  >
+    <li
+      class="MuiBreadcrumbs-li"
+    >
+      <a
+        class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineHover css-t7xl82-MuiTypography-root-MuiLink-root"
+        data-testid="bread-firstlevel"
+        href="/"
+      >
+        Início
+      </a>
+    </li>
+    <li
+      aria-hidden="true"
+      class="MuiBreadcrumbs-separator css-1wuw8dw-MuiBreadcrumbs-separator"
+    >
+      ›
+    </li>
+    <li
+      class="MuiBreadcrumbs-li"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-1yr8029-MuiTypography-root"
+        data-testid="bread-lastlevel"
+      >
+        Autores
+      </p>
+    </li>
+  </ol>
+</nav>
+`;
