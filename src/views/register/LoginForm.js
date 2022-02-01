@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { THEME_COLOR } from "../../constants/default_settings";
 import { REQUIRED_MESSAGE } from "../../constants/messages";
 import moneyImage from "../../assets/moneyfinance-1.jpg";
+import axios from "axios";
 
 function LoginForm({ setToken }) {
   const {
@@ -21,11 +22,25 @@ function LoginForm({ setToken }) {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
 
   useEffect(() => {
     // setToken("!21111");
   });
+
+  async function loginUser(credentials) {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/login`,
+        { ...credentials }
+      );
+
+      setToken(response.data.accessToken);
+    } catch (error) {
+      console.log("error login user", error.response.data);
+    }
+  }
+
+  const onSubmit = (data) => loginUser(data);
 
   return (
     <>
@@ -66,8 +81,8 @@ function LoginForm({ setToken }) {
                   <TextField
                     fullWidth
                     id="username"
-                    label="E-mail"
-                    inputProps={{ "data-testid": "username", type: "email" }}
+                    label="Usuário"
+                    inputProps={{ "data-testid": "username" }}
                     error={Boolean(errors.username)}
                     helperText={errors.username && REQUIRED_MESSAGE}
                     {...register("username", {
