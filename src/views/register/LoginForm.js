@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from "react";
 import {
-  Container,
   Card,
   CardContent,
   Typography,
   Grid,
   TextField,
   Button,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-import { THEME_COLOR } from "../../constants/default_settings";
+import {
+  THEME_COLOR,
+  SNACKBAR_DIRECTION,
+} from "../../constants/default_settings";
 import { REQUIRED_MESSAGE } from "../../constants/messages";
 import moneyImage from "../../assets/moneyfinance-1.jpg";
 import axios from "axios";
 
 function LoginForm({ setToken }) {
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -23,9 +30,9 @@ function LoginForm({ setToken }) {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    // setToken("!21111");
-  });
+  function handleCloseToast() {
+    setOpen(false);
+  }
 
   async function loginUser(credentials) {
     try {
@@ -36,7 +43,8 @@ function LoginForm({ setToken }) {
 
       setToken(response.data.accessToken);
     } catch (error) {
-      console.log("error login user", error.response.data);
+      setOpen(true);
+      setError(error.response.data);
     }
   }
 
@@ -57,6 +65,20 @@ function LoginForm({ setToken }) {
           overflow: "hidden",
         }}
       >
+        <Snackbar
+          anchorOrigin={SNACKBAR_DIRECTION}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleCloseToast}
+        >
+          <Alert
+            onClose={handleCloseToast}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            {error}
+          </Alert>
+        </Snackbar>
         <Card sx={{ width: "50%" }}>
           <CardContent>
             <Typography
