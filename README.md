@@ -19,3 +19,9 @@ Criar arquivo .env e configurar as variáveis de ambiente, semelhantes ao arquiv
 Execute o projeto:
 
     npm start
+
+### Execução de testes automatizados
+
+Execute os testes disponíveis, por meio do comando:
+
+    npm run test
