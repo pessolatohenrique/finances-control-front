@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import AppBarWrapper from "./components/AppBarWrapper";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import useToken from "./hooks/useToken";
+import AppBarWrapper from "./components/AppBarWrapper";
+import NotFound from "./components/NotFound";
 import ExampleList from "./views/register/ExampleList";
 import ExampleForm from "./views/register/ExampleForm";
 import ExampleDetail from "./views/register/ExampleDetail";
-import NotFound from "./components/NotFound";
 import LoginForm from "./views/register/LoginForm";
 
 function App() {
-  const [token, setToken] = useState();
+  const { token, setToken } = useToken();
 
   if (!token) {
     return <LoginForm setToken={setToken} />;
