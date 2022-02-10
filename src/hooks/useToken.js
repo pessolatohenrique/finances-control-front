@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { initializeAxios } from "../utils/requests";
 
 function useToken() {
   const [token, setToken] = useState(getToken());
@@ -8,8 +9,9 @@ function useToken() {
     return token || "";
   }
 
-  function saveToken(token) {
-    localStorage.setItem("token", token);
+  async function saveToken(token) {
+    await localStorage.setItem("token", token);
+    initializeAxios(token);
     setToken(token);
   }
 

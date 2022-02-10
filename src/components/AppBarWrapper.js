@@ -16,7 +16,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import BookIcon from "@material-ui/icons/Book";
 import PeopleIcon from "@material-ui/icons/People";
 import { PROJECT_NAME } from "../constants/default_settings";
-import { initializeAxios } from "../utils/requests";
 
 const items = [
   {
@@ -38,10 +37,6 @@ const items = [
 
 function AppBarWrapper() {
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    initializeAxios();
-  }, []);
 
   function handleDrawerOpen() {
     setOpen(true);

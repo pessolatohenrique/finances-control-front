@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Card,
@@ -22,6 +22,7 @@ import { THEME_COLOR } from "../../constants/default_settings";
 import BreadcrumbsWrapper from "../../components/BreadcrumbsWrapper";
 import ViewListToggle from "../../components/ViewListToggle";
 import useView from "../../hooks/useView";
+import axios from "axios";
 
 function createData(name, author, pages, genre) {
   return { name, author, pages, genre };
@@ -47,6 +48,10 @@ const rows = [
 
 function ExampleList() {
   const [isTable, isList, switchFormat] = useView();
+
+  useEffect(async () => {
+    await axios.get("/category");
+  });
 
   return (
     <>

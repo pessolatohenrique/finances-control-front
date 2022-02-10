@@ -1,11 +1,10 @@
 import axios from "axios";
 
-export function initializeAxios() {
-  axios.defaults.baseURL = "https://api.example.com";
-
-  // Important: If axios is used with multiple domains, the AUTH_TOKEN will be sent to all of them.
-  // See below for an example using Custom instance defaults instead.
-  //   axios.defaults.headers.common["Authorization"] = "123456";
-
+export async function initializeAxios(tokenParam = "") {
+  const token = tokenParam || localStorage.getItem("token");
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   axios.defaults.headers.post["Content-Type"] = "application/json";
 }
+
+export default axios;
