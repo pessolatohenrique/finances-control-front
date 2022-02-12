@@ -9,10 +9,10 @@ import ExampleDetail from "./views/register/ExampleDetail";
 import LoginForm from "./views/register/LoginForm";
 
 function App() {
-  const { token, setToken } = useToken();
+  const { token, setToken, setRefreshToken } = useToken();
 
   if (!token) {
-    return <LoginForm setToken={setToken} />;
+    return <LoginForm setToken={setToken} setRefreshToken={setRefreshToken} />;
   }
 
   return (

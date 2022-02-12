@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -19,14 +19,13 @@ import { REQUIRED_MESSAGE } from "../../constants/messages";
 import moneyImage from "../../assets/moneyfinance-1.jpg";
 import axios from "axios";
 
-function LoginForm({ setToken }) {
+function LoginForm({ setToken, setRefreshToken }) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -42,6 +41,7 @@ function LoginForm({ setToken }) {
       );
 
       setToken(response.data.accessToken);
+      setRefreshToken(response.data.refreshToken);
     } catch (error) {
       setOpen(true);
       setError(error.response.data);
