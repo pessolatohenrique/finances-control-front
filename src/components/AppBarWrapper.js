@@ -35,7 +35,7 @@ const items = [
   },
 ];
 
-function AppBarWrapper() {
+function AppBarWrapper(props) {
   const [open, setOpen] = useState(false);
 
   function handleDrawerOpen() {
@@ -44,6 +44,12 @@ function AppBarWrapper() {
 
   function handleDrawerClose() {
     setOpen(false);
+  }
+
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    window.location.href = "/";
   }
 
   return (
@@ -69,7 +75,9 @@ function AppBarWrapper() {
           >
             {PROJECT_NAME}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={logout} data-testid="button-logout">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open}>

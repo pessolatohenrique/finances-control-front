@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import useToken from "./hooks/useToken";
 import AppBarWrapper from "./components/AppBarWrapper";
 import NotFound from "./components/NotFound";
@@ -8,7 +13,7 @@ import ExampleForm from "./views/register/ExampleForm";
 import ExampleDetail from "./views/register/ExampleDetail";
 import LoginForm from "./views/register/LoginForm";
 
-function App() {
+function App(props) {
   const { token, setToken, setRefreshToken } = useToken();
 
   if (!token) {
@@ -20,10 +25,6 @@ function App() {
       <AppBarWrapper />
 
       <Switch>
-        <Route exact path="/signin">
-          <LoginForm />
-        </Route>
-
         <Route exact path="/livros">
           <ExampleList />
         </Route>
