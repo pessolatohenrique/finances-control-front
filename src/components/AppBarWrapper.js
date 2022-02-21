@@ -49,7 +49,7 @@ function AppBarWrapper(props) {
   function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
-    window.location.href = "/";
+    window.location.href = "/signin";
   }
 
   return (
@@ -75,7 +75,7 @@ function AppBarWrapper(props) {
           >
             {PROJECT_NAME}
           </Typography>
-          <Button color="inherit" onClick={logout} data-testid="button-logout">
+          <Button color="inherit" onClick={logout} data-testid="logout-button">
             Logout
           </Button>
         </Toolbar>

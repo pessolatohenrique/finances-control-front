@@ -36,14 +36,15 @@ exports[`AppBarWrapper should generate snapshot 1`] = `
         class="MuiTypography-root MuiTypography-h6 css-1juivf6-MuiTypography-root"
         data-testid="project-name"
       >
-        Project Name
+        Finances Control
       </div>
       <button
         class="MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButtonBase-root css-1y942vo-MuiButtonBase-root-MuiButton-root"
+        data-testid="logout-button"
         tabindex="0"
         type="button"
       >
-        Login
+        Logout
         <span
           class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
