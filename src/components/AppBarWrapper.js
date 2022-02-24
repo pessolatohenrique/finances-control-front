@@ -16,6 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import BookIcon from "@material-ui/icons/Book";
 import PeopleIcon from "@material-ui/icons/People";
 import { PROJECT_NAME } from "../constants/default_settings";
+import { isPageWithoutLogin } from "../utils/pages";
 
 const items = [
   {
@@ -37,6 +38,7 @@ const items = [
 
 function AppBarWrapper(props) {
   const [open, setOpen] = useState(false);
+  const pathsWithoutLogin = ["/usuario/novo"];
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -50,6 +52,10 @@ function AppBarWrapper(props) {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
     window.location.href = "/signin";
+  }
+
+  if (isPageWithoutLogin()) {
+    return <></>;
   }
 
   return (
