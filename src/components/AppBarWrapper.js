@@ -38,7 +38,6 @@ const items = [
 
 function AppBarWrapper(props) {
   const [open, setOpen] = useState(false);
-  const pathsWithoutLogin = ["/usuario/novo"];
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -52,10 +51,6 @@ function AppBarWrapper(props) {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
     window.location.href = "/signin";
-  }
-
-  if (isPageWithoutLogin()) {
-    return <></>;
   }
 
   return (
@@ -81,9 +76,15 @@ function AppBarWrapper(props) {
           >
             {PROJECT_NAME}
           </Typography>
-          <Button color="inherit" onClick={logout} data-testid="logout-button">
-            Logout
-          </Button>
+          {!isPageWithoutLogin() && (
+            <Button
+              color="inherit"
+              onClick={logout}
+              data-testid="logout-button"
+            >
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open}>
