@@ -1,42 +1,50 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Card,
   CardContent,
-  Typography,
   Grid,
   Stepper,
   Step,
   StepLabel,
-  TextField,
-  Button,
-  Snackbar,
-  Alert,
 } from "@mui/material";
-import {
-  THEME_COLOR,
-  SNACKBAR_DIRECTION,
-} from "../../constants/default_settings";
 import moneyImage from "../../assets/moneyfinance-1.jpg";
+import RecipeChoose from "../recipe/RecipeChoose";
 import RegisterForm from "./RegisterForm";
 
 function RegisterContainer() {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
+  const [recipes, setRecipes] = useState([]);
+  const [error, setError] = useState("");
 
   const steps = ["Cadastro", "Receita do Sucesso"];
   const forms = [
     <>
       <RegisterForm onColectData={colectData} />
     </>,
-    <h1>componente de form 2</h1>,
+    <>
+      <RecipeChoose onColectData={colectData} recipes={recipes} />
+    </>,
   ];
 
   useEffect(() => {
+    async function getRecipes() {
+      try {
+        const response = await axios.get(`/recipe`);
+        setRecipes(response.data);
+      } catch (error) {
+        setError(error.response.data);
+      }
+    }
+
+    getRecipes();
+
     const formsLength = forms.length - 1;
     if (step === formsLength) {
       console.log("final form!!!");
     }
-  });
+  }, []);
 
   function colectData(data) {
     const updatedData = { ...formData, ...data };
