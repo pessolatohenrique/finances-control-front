@@ -7,7 +7,7 @@ import {
   PASSWORD_MISMATCH_MESSAGE,
 } from "../../constants/messages";
 
-function RegisterForm({ onColectData }) {
+function RegisterForm({ onColectData, endpoint }) {
   const {
     register,
     handleSubmit,
@@ -15,7 +15,7 @@ function RegisterForm({ onColectData }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => onColectData(data);
+  const onSubmit = (data) => onColectData({ ...data, role: "user" }, endpoint);
 
   return (
     <Grid>

@@ -19,15 +19,6 @@ import {
 import RecipeDetail from "./RecipeDetail";
 
 function RecipeChoose({ recipes, onColectData }) {
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => onColectData(data);
-
   return (
     <Grid>
       <Typography
@@ -44,7 +35,11 @@ function RecipeChoose({ recipes, onColectData }) {
 
       <Grid container spacing={2}>
         {[...recipes].map((recipe) => (
-          <RecipeDetail recipe={recipe} key={recipe.id} />
+          <RecipeDetail
+            recipe={recipe}
+            key={recipe.id}
+            onColectData={onColectData}
+          />
         ))}
       </Grid>
     </Grid>

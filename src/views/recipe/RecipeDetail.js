@@ -19,7 +19,7 @@ function RecipeDetail({ recipe, onColectData }) {
     // <Grid container spacing={2}>
     <Grid item xs={6}>
       <Card sx={{ backgroundColor: "#0E4DA4", color: "#fff" }}>
-        <CardActionArea>
+        <CardActionArea onClick={() => onColectData({ recipeId: recipe.id })}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {recipe.name}
@@ -28,7 +28,7 @@ function RecipeDetail({ recipe, onColectData }) {
             {[
               ...recipe.Categories.map((category) => {
                 return (
-                  <ListItem>
+                  <ListItem key={category.id}>
                     <ListItemIcon>
                       <FolderIcon sx={{ color: "white" }} />
                     </ListItemIcon>
@@ -42,7 +42,13 @@ function RecipeDetail({ recipe, onColectData }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button variant="contained" size="large" color="info" fullWidth>
+          <Button
+            variant="contained"
+            size="large"
+            color="info"
+            fullWidth
+            onClick={() => onColectData({ recipeId: recipe.id })}
+          >
             Escolher
           </Button>
         </CardActions>
