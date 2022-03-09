@@ -42,7 +42,9 @@ async function initializeInterceptor() {
 export async function initializeAxios(tokenParam = "") {
   const token = tokenParam || localStorage.getItem("token");
   axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
   axios.defaults.headers.post["Content-Type"] = "application/json";
   await initializeInterceptor();
 }

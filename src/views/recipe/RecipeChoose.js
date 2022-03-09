@@ -18,7 +18,7 @@ import {
 
 import RecipeDetail from "./RecipeDetail";
 
-function RecipeChoose({ recipes, onColectData }) {
+function RecipeChoose({ recipes, endpoint, onColectData }) {
   return (
     <Grid>
       <Typography
@@ -38,7 +38,13 @@ function RecipeChoose({ recipes, onColectData }) {
           <RecipeDetail
             recipe={recipe}
             key={recipe.id}
-            onColectData={onColectData}
+            endpoint={endpoint}
+            onColectData={() =>
+              onColectData(
+                { recipeId: recipe.id },
+                { method: "put", name: `${endpoint.name}/${recipe.id}` }
+              )
+            }
           />
         ))}
       </Grid>

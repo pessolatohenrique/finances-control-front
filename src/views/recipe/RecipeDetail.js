@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import FolderIcon from "@material-ui/icons/Folder";
 
-function RecipeDetail({ recipe, onColectData }) {
+function RecipeDetail({ recipe, endpoint, onColectData }) {
   return (
     // <Grid container spacing={2}>
     <Grid item xs={6}>
@@ -47,7 +47,12 @@ function RecipeDetail({ recipe, onColectData }) {
             size="large"
             color="info"
             fullWidth
-            onClick={() => onColectData({ recipeId: recipe.id })}
+            onClick={() =>
+              onColectData(
+                { recipeId: recipe.id },
+                `${endpoint.name}/${recipe.id}`
+              )
+            }
           >
             Escolher
           </Button>

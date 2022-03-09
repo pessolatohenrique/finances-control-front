@@ -10,10 +10,8 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import {
-  THEME_COLOR,
-  SNACKBAR_DIRECTION,
-} from "../../constants/default_settings";
+import useToken from "../../hooks/useToken";
+import { SNACKBAR_DIRECTION } from "../../constants/default_settings";
 import moneyImage from "../../assets/moneyfinance-1.jpg";
 import RecipeChoose from "../recipe/RecipeChoose";
 import RegisterForm from "./RegisterForm";
@@ -22,20 +20,27 @@ function RegisterContainer() {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [recipes, setRecipes] = useState([]);
+  const [tmpToken, setTmpToken] = useState("");
   // toast
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
+  // login
+  const { setToken, setRefreshToken } = useToken();
 
   const steps = ["Cadastro", "Receita do Sucesso"];
   const forms = [
     <>
       <RegisterForm
         onColectData={colectData}
-        endpoint={{ method: "post", name: "user" }}
+        endpoint={{ method: "post", name: "user", generateToken: true }}
       />
     </>,
     <>
-      <RecipeChoose onColectData={colectData} recipes={recipes} />
+      <RecipeChoose
+        onColectData={colectData}
+        recipes={recipes}
+        endpoint={{ method: "put", name: "recipe/associate" }}
+      />
     </>,
   ];
 
@@ -50,20 +55,63 @@ function RegisterContainer() {
     }
 
     getRecipes();
-
-    const formsLength = forms.length - 1;
-    if (step === formsLength) {
-      console.log("final form!!!");
-    }
   }, []);
 
-  async function saveUser(endpoint, data = {}) {
+  useEffect(() => {
+    const formsLength = forms.length;
+    if (step === formsLength) {
+      loginUser(formData);
+    }
+  }, [step]);
+
+  async function loginUser(credentials) {
     try {
-      const { method, name } = endpoint;
-      await axios[method](`${process.env.REACT_APP_API_URL}/${name}`, {
-        ...data,
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/login`,
+        { ...credentials }
+      );
+
+      setToken(response.data.accessToken);
+      setRefreshToken(response.data.refreshToken);
+      window.location.href = "/";
+    } catch (error) {
+      setOpen(true);
+      setError(error.response.data);
+    }
+  }
+
+  async function loginUserTemporary(credentials) {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/login`,
+        { ...credentials }
+      );
+
+      setTmpToken(response.data.accessToken);
+    } catch (error) {
+      setOpen(true);
+      setError(error.response.data);
+    }
+  }
+
+  async function saveEndpoint(endpoint, data = {}) {
+    try {
+      const { method, name, generateToken } = endpoint;
+
+      const authHeader =
+        tmpToken && tmpToken !== null
+          ? { Authorization: `Bearer ${tmpToken}` }
+          : "";
+
+      await axios[method](`${process.env.REACT_APP_API_URL}/${name}`, data, {
+        headers: authHeader,
       });
 
+      if (generateToken) {
+        await loginUserTemporary(data);
+      }
+
+      setOpen(false);
       setError("");
     } catch (error) {
       const error_message = error?.response?.data?.errors[0]?.message;
@@ -78,7 +126,7 @@ function RegisterContainer() {
     setFormData(updatedData);
 
     if (endpoint) {
-      const result = await saveUser(endpoint, updatedData);
+      const result = await saveEndpoint(endpoint, data);
       if (result?.error) return;
     }
 
