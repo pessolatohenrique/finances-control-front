@@ -50,7 +50,7 @@ function RegisterContainer() {
         const response = await axios.get(`/recipe`);
         setRecipes(response.data);
       } catch (error) {
-        setError(error.response.data);
+        setError(error?.response?.data);
       }
     }
 
@@ -76,7 +76,7 @@ function RegisterContainer() {
       window.location.href = "/";
     } catch (error) {
       setOpen(true);
-      setError(error.response.data);
+      setError(error?.response?.data);
     }
   }
 
@@ -90,7 +90,7 @@ function RegisterContainer() {
       setTmpToken(response.data.accessToken);
     } catch (error) {
       setOpen(true);
-      setError(error.response.data);
+      setError(error?.response?.data);
     }
   }
 
