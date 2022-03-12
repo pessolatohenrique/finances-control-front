@@ -10,28 +10,23 @@ import {
   Alert,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-
+import axios from "axios";
 import {
   THEME_COLOR,
   SNACKBAR_DIRECTION,
 } from "../../constants/default_settings";
 import { REQUIRED_MESSAGE } from "../../constants/messages";
 import moneyImage from "../../assets/moneyfinance-1.jpg";
-import axios from "axios";
+import useToast from "../../hooks/useToast";
 
 function LoginForm({ setToken, setRefreshToken }) {
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState("");
+  const { open, error, setError, showToast, hideToast } = useToast();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  function handleCloseToast() {
-    setOpen(false);
-  }
 
   async function loginUser(credentials) {
     try {
@@ -43,7 +38,7 @@ function LoginForm({ setToken, setRefreshToken }) {
       setToken(response.data.accessToken);
       setRefreshToken(response.data.refreshToken);
     } catch (error) {
-      setOpen(true);
+      showToast();
       setError(error.response.data);
     }
   }
@@ -69,13 +64,9 @@ function LoginForm({ setToken, setRefreshToken }) {
           anchorOrigin={SNACKBAR_DIRECTION}
           open={open}
           autoHideDuration={6000}
-          onClose={handleCloseToast}
+          onClose={hideToast}
         >
-          <Alert
-            onClose={handleCloseToast}
-            severity="error"
-            sx={{ width: "100%" }}
-          >
+          <Alert onClose={hideToast} severity="error" sx={{ width: "100%" }}>
             {error}
           </Alert>
         </Snackbar>

@@ -11,6 +11,7 @@ import {
   Alert,
 } from "@mui/material";
 import useToken from "../../hooks/useToken";
+import useToast from "../../hooks/useToast";
 import { SNACKBAR_DIRECTION } from "../../constants/default_settings";
 import moneyImage from "../../assets/moneyfinance-1.jpg";
 import RecipeChoose from "../recipe/RecipeChoose";
@@ -21,9 +22,8 @@ function RegisterContainer() {
   const [formData, setFormData] = useState({});
   const [recipes, setRecipes] = useState([]);
   const [tmpToken, setTmpToken] = useState("");
-  // toast
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState("");
+
+  const { open, error, setError, showToast, hideToast } = useToast();
   // login
   const { setToken, setRefreshToken } = useToken();
 
@@ -75,7 +75,7 @@ function RegisterContainer() {
       setRefreshToken(response.data.refreshToken);
       window.location.href = "/";
     } catch (error) {
-      setOpen(true);
+      showToast();
       setError(error?.response?.data);
     }
   }
@@ -89,7 +89,7 @@ function RegisterContainer() {
 
       setTmpToken(response.data.accessToken);
     } catch (error) {
-      setOpen(true);
+      showToast();
       setError(error?.response?.data);
     }
   }
@@ -111,11 +111,11 @@ function RegisterContainer() {
         await loginUserTemporary(data);
       }
 
-      setOpen(false);
+      hideToast();
       setError("");
     } catch (error) {
       const error_message = error?.response?.data?.errors[0]?.message;
-      setOpen(true);
+      showToast();
       setError(error_message);
       return { error: error_message };
     }
@@ -137,10 +137,6 @@ function RegisterContainer() {
     setStep(step + 1);
   }
 
-  function handleCloseToast() {
-    setOpen(false);
-  }
-
   return (
     <Grid
       display="flex"
@@ -159,13 +155,9 @@ function RegisterContainer() {
         anchorOrigin={SNACKBAR_DIRECTION}
         open={open}
         autoHideDuration={6000}
-        onClose={handleCloseToast}
+        onClose={hideToast}
       >
-        <Alert
-          onClose={handleCloseToast}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
+        <Alert onClose={hideToast} severity="error" sx={{ width: "100%" }}>
           {error}
         </Alert>
       </Snackbar>
