@@ -6,32 +6,43 @@ import {
   CardContent,
   Typography,
   Alert,
-  Button,
   Snackbar,
 } from "@mui/material";
+import RecipeChoose from "./RecipeChoose";
 import BreadcrumbsWrapper from "../../components/BreadcrumbsWrapper";
 import { SNACKBAR_DIRECTION } from "../../constants/default_settings";
 import useToast from "../../hooks/useToast";
 import { THEME_COLOR } from "../../constants/default_settings";
 
-function DashboardContainer() {
+function RecipeContainer() {
   const { open, error, setError, showToast, hideToast } = useToast();
-
-  const [userRecipe, setUserRecipe] = useState();
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    async function getUserRecipe() {
+    async function getRecipes() {
       try {
-        const response = await axios.get(`/user/recipe`);
-        setUserRecipe(response.data);
+        const response = await axios.get(`/recipe`);
+        setRecipes(response.data);
       } catch (error) {
         showToast();
-        setError(error?.response?.data?.message || null);
+        setError(error?.response?.data?.message);
       }
     }
 
-    getUserRecipe();
+    getRecipes();
   }, []);
+
+  async function colectData(data) {
+    try {
+      const { recipeId } = data;
+      await axios.put(`/recipe/associate/${recipeId}`);
+      window.location.href = "/";
+    } catch (error) {
+      showToast();
+      setError(error?.response?.data?.message);
+    }
+    console.log("colect data!", data);
+  }
 
   return (
     <Container fixed>
@@ -48,31 +59,25 @@ function DashboardContainer() {
       </Snackbar>
       <Card>
         <CardContent>
+          <BreadcrumbsWrapper childrenLabel="Associar Receita" />
+
           <Typography
             gutterBottom
             variant="h5"
             component="h1"
             color={THEME_COLOR}
           >
-            Dashboard
+            Associar Receita
           </Typography>
-          {!userRecipe && (
-            <Alert
-              severity="warning"
-              action={
-                <Button color="inherit" size="small" href="/receita/associar">
-                  <strong>{"Associar".toUpperCase()}</strong>
-                </Button>
-              }
-            >
-              Para receber dicas personalizadas, associe uma "receita do
-              sucesso"!
-            </Alert>
-          )}
+          <RecipeChoose
+            onColectData={colectData}
+            recipes={recipes}
+            endpoint={{ method: "put", name: "recipe/associate" }}
+          />
         </CardContent>
       </Card>
     </Container>
   );
 }
 
-export default DashboardContainer;
+export default RecipeContainer;
