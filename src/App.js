@@ -9,6 +9,7 @@ import ExampleForm from "./views/register/ExampleForm";
 import ExampleDetail from "./views/register/ExampleDetail";
 import LoginForm from "./views/register/LoginForm";
 import RegisterContainer from "./views/register/RegisterContainer";
+import DashboardContainer from "./views/dashboard/DashboardContainer";
 
 function App(props) {
   const { token, setToken, setRefreshToken } = useToken();
@@ -22,6 +23,9 @@ function App(props) {
       <AppBarWrapper />
 
       <Switch>
+        <Route exact path="/">
+          <DashboardContainer />
+        </Route>
         <Route exact path="/usuario/novo">
           <RegisterContainer />
         </Route>
