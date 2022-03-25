@@ -60,7 +60,12 @@ function DashboardContainer() {
             <Alert
               severity="warning"
               action={
-                <Button color="inherit" size="small" href="/receita/associar">
+                <Button
+                  color="inherit"
+                  size="small"
+                  href="/receita/associar"
+                  data-testid="associate-button"
+                >
                   <strong>{"Associar".toUpperCase()}</strong>
                 </Button>
               }

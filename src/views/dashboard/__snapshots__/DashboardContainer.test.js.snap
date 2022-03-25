@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Container should generate snapshot 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-fixed css-1ss2ei0-MuiContainer-root"
+  >
+    <br />
+    <div
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+    >
+      <div
+        class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+      >
+        <h1
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1y15g74-MuiTypography-root"
+        >
+          Dashboard
+        </h1>
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiAlert-root MuiAlert-standardWarning MuiAlert-standard css-1c32mdt-MuiPaper-root-MuiAlert-root"
+          role="alert"
+        >
+          <div
+            class="MuiAlert-icon css-1ytlwq5-MuiAlert-icon"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+              data-testid="ReportProblemOutlinedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"
+              />
+            </svg>
+          </div>
+          <div
+            class="MuiAlert-message css-acap47-MuiAlert-message"
+          >
+            Para receber dicas personalizadas, associe uma "receita do sucesso"!
+          </div>
+          <div
+            class="MuiAlert-action css-ki1hdl-MuiAlert-action"
+          >
+            <a
+              class="MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorInherit MuiButtonBase-root css-u44ztt-MuiButtonBase-root-MuiButton-root"
+              data-testid="associate-button"
+              href="/receita/associar"
+              tabindex="0"
+            >
+              <strong>
+                ASSOCIAR
+              </strong>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
