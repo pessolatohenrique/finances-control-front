@@ -43,9 +43,20 @@ function DashboardContainer() {
   const { open, error, setError, showToast, hideToast } = useToast();
 
   const [userRecipe, setUserRecipe] = useState();
+  const [budget, setBudget] = useState();
 
   useEffect(() => {
     async function getUserRecipe() {
+      try {
+        const response = await axios.get(`budget/summarize?month=3`);
+        setBudget(response.data);
+      } catch (error) {
+        showToast();
+        setError(error?.response?.data?.message || null);
+      }
+    }
+
+    async function getBudget() {
       try {
         const response = await axios.get(`/user/recipe`);
         setUserRecipe(response.data);
@@ -56,7 +67,10 @@ function DashboardContainer() {
     }
 
     getUserRecipe();
+    getBudget();
   }, []);
+
+  console.log("budget", budget);
 
   return (
     <Grid
@@ -103,12 +117,12 @@ function DashboardContainer() {
 
         <IndicatorCard
           image={earningImage}
-          title="R$ 5000"
+          title={`R$ ${budget?.sum_earning}`}
           subtitle="de ganhos"
         />
         <IndicatorCard
           image={expensesImage}
-          title="R$ 5000"
+          title={`R$ ${budget?.sum_expense}`}
           subtitle="de gastos"
         />
         <IndicatorCard
