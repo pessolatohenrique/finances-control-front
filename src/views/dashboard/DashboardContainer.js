@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
 import {
   Grid,
   Card,
@@ -44,11 +45,15 @@ function DashboardContainer() {
 
   const [userRecipe, setUserRecipe] = useState();
   const [budget, setBudget] = useState();
+  const [monthFilter, setMonthFilter] = useState(moment().format("MM"));
+  const [yearFilter, setYearFilter] = useState(moment().format("YYYY"));
 
   useEffect(() => {
     async function getUserRecipe() {
       try {
-        const response = await axios.get(`budget/summarize?month=3`);
+        const response = await axios.get(
+          `budget/summarize?month=${monthFilter}&year=${yearFilter}`
+        );
         setBudget(response.data);
       } catch (error) {
         showToast();
@@ -69,8 +74,6 @@ function DashboardContainer() {
     getUserRecipe();
     getBudget();
   }, []);
-
-  console.log("budget", budget);
 
   return (
     <Grid
@@ -117,17 +120,17 @@ function DashboardContainer() {
 
         <IndicatorCard
           image={earningImage}
-          title={`R$ ${budget?.sum_earning}`}
+          title={`R$ ${budget?.sum_earning?.toFixed(2)}`}
           subtitle="de ganhos"
         />
         <IndicatorCard
           image={expensesImage}
-          title={`R$ ${budget?.sum_expense}`}
+          title={`R$ ${budget?.sum_expense?.toFixed(2)}`}
           subtitle="de gastos"
         />
         <IndicatorCard
           image={indicatorsImage}
-          title="45%"
+          title={`${budget?.sum_percentage?.toFixed(2)}%`}
           subtitle="de gastos da receita de sucesso"
         />
       </Grid>
