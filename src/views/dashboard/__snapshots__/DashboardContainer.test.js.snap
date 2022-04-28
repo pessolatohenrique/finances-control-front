@@ -3,61 +3,127 @@
 exports[`Dashboard Container should generate snapshot 1`] = `
 <div>
   <div
-    class="MuiContainer-root MuiContainer-maxWidthLg MuiContainer-fixed css-1ss2ei0-MuiContainer-root"
+    class="MuiGrid-root css-4m4w48-MuiGrid-root"
   >
     <br />
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+      class="MuiGrid-root css-1mvjg4q-MuiGrid-root"
     >
       <div
-        class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiAlert-root MuiAlert-standardWarning MuiAlert-standard css-1c32mdt-MuiPaper-root-MuiAlert-root"
+        role="alert"
       >
-        <h1
-          class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1y15g74-MuiTypography-root"
-        >
-          Dashboard
-        </h1>
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiAlert-root MuiAlert-standardWarning MuiAlert-standard css-1c32mdt-MuiPaper-root-MuiAlert-root"
-          role="alert"
+          class="MuiAlert-icon css-1ytlwq5-MuiAlert-icon"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="ReportProblemOutlinedIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message css-acap47-MuiAlert-message"
+        >
+          Para receber dicas personalizadas, associe uma "receita do sucesso"!
+        </div>
+        <div
+          class="MuiAlert-action css-ki1hdl-MuiAlert-action"
+        >
+          <a
+            class="MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorInherit MuiButtonBase-root css-u44ztt-MuiButtonBase-root-MuiButton-root"
+            data-testid="associate-button"
+            href="/receita/associar"
+            tabindex="0"
+          >
+            <strong>
+              ASSOCIAR
+            </strong>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </a>
+        </div>
+      </div>
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1cllq7-MuiPaper-root-MuiCard-root"
+        data-testid="indicator-card"
+      >
+        <img
+          alt="green iguana"
+          class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-dzbxvc-MuiCardMedia-root"
+          height="140"
+          src="earnings.jpg"
+        />
+        <div
+          class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
         >
           <div
-            class="MuiAlert-icon css-1ytlwq5-MuiAlert-icon"
+            class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
-              data-testid="ReportProblemOutlinedIcon"
-              focusable="false"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"
-              />
-            </svg>
+            R$ undefined
           </div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+          >
+            de ganhos
+          </p>
+        </div>
+      </div>
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1cllq7-MuiPaper-root-MuiCard-root"
+        data-testid="indicator-card"
+      >
+        <img
+          alt="green iguana"
+          class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-dzbxvc-MuiCardMedia-root"
+          height="140"
+          src="expenses.jpg"
+        />
+        <div
+          class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+        >
           <div
-            class="MuiAlert-message css-acap47-MuiAlert-message"
+            class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
           >
-            Para receber dicas personalizadas, associe uma "receita do sucesso"!
+            R$ undefined
           </div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+          >
+            de gastos
+          </p>
+        </div>
+      </div>
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1cllq7-MuiPaper-root-MuiCard-root"
+        data-testid="indicator-card"
+      >
+        <img
+          alt="green iguana"
+          class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-dzbxvc-MuiCardMedia-root"
+          height="140"
+          src="indicators.png"
+        />
+        <div
+          class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+        >
           <div
-            class="MuiAlert-action css-ki1hdl-MuiAlert-action"
+            class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
           >
-            <a
-              class="MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorInherit MuiButtonBase-root css-u44ztt-MuiButtonBase-root-MuiButton-root"
-              data-testid="associate-button"
-              href="/receita/associar"
-              tabindex="0"
-            >
-              <strong>
-                ASSOCIAR
-              </strong>
-              <span
-                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-              />
-            </a>
+            undefined%
           </div>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+          >
+            de gastos da receita de sucesso
+          </p>
         </div>
       </div>
     </div>

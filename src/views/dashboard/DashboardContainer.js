@@ -20,7 +20,7 @@ import useToast from "../../hooks/useToast";
 
 function IndicatorCard({ image, title, subtitle }) {
   return (
-    <Card sx={{ width: "27%" }}>
+    <Card sx={{ width: "27%" }} data-testid="indicator-card">
       <CardMedia
         component="img"
         height="140"

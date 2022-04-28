@@ -58,4 +58,10 @@ describe("Dashboard Container", () => {
       expect(screen.queryByText("Associar")).not.toBeInTheDocument()
     );
   });
+
+  it("should load indicators cards", async () => {
+    render(<DashboardContainer />);
+    const indicatorCard = screen.getAllByTestId("indicator-card");
+    expect(indicatorCard.length).toBe(3);
+  });
 });
