@@ -39,7 +39,7 @@ exports[`AppBarWrapper should generate snapshot 1`] = `
         Finances Control
       </div>
       <button
-        class="MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButtonBase-root css-1y942vo-MuiButtonBase-root-MuiButton-root"
+        class="MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButtonBase-root  css-1y942vo-MuiButtonBase-root-MuiButton-root"
         data-testid="logout-button"
         tabindex="0"
         type="button"
@@ -103,7 +103,7 @@ exports[`AppBarWrapper should generate snapshot 1`] = `
               </svg>
             </div>
             <a
-              class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root css-1knaqv7-MuiButtonBase-root-MuiButton-root"
+              class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
               href="/autores"
               tabindex="0"
             >
@@ -137,7 +137,7 @@ exports[`AppBarWrapper should generate snapshot 1`] = `
               </svg>
             </div>
             <a
-              class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root css-1knaqv7-MuiButtonBase-root-MuiButton-root"
+              class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
               href="/livros"
               tabindex="0"
             >
@@ -171,7 +171,7 @@ exports[`AppBarWrapper should generate snapshot 1`] = `
               </svg>
             </div>
             <a
-              class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root css-1knaqv7-MuiButtonBase-root-MuiButton-root"
+              class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
               href="/livros/5"
               tabindex="0"
             >

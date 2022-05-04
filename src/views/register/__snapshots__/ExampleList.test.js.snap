@@ -22,7 +22,7 @@ exports[`ExampleList should generate snapshot 1`] = `
             class="MuiBreadcrumbs-li"
           >
             <a
-              class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineHover css-t7xl82-MuiTypography-root-MuiLink-root"
+              class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineHover css-9smqfy-MuiTypography-root-MuiLink-root"
               data-testid="bread-firstlevel"
               href="/"
             >
@@ -53,10 +53,10 @@ exports[`ExampleList should generate snapshot 1`] = `
         Livros
       </h1>
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-undefined css-1mx4t5n-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container css-1mx4t5n-MuiGrid-root"
       >
         <button
-          class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root css-sghohy-MuiButtonBase-root-MuiButton-root"
+          class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-sghohy-MuiButtonBase-root-MuiButton-root"
           data-testid="view-table"
           tabindex="0"
           type="button"
@@ -77,7 +77,7 @@ exports[`ExampleList should generate snapshot 1`] = `
           />
         </button>
         <button
-          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1e6y48t-MuiButtonBase-root-MuiButton-root"
           data-testid="view-card"
           tabindex="0"
           type="button"
@@ -267,7 +267,7 @@ exports[`ExampleList should generate snapshot 1`] = `
       class="MuiCardActions-root MuiCardActions-spacing css-1t6e9jv-MuiCardActions-root"
     >
       <a
-        class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root css-1knaqv7-MuiButtonBase-root-MuiButton-root"
+        class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButtonBase-root  css-1knaqv7-MuiButtonBase-root-MuiButton-root"
         href="/autores/novo"
         tabindex="0"
       >
