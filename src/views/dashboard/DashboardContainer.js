@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+import { useForm } from "react-hook-form";
 import {
   Grid,
   Card,
@@ -10,12 +11,20 @@ import {
   Alert,
   Button,
   Snackbar,
+  TextField,
 } from "@mui/material";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import earningImage from "../../assets/earnings.jpg";
 import expensesImage from "../../assets/expenses.jpg";
 import indicatorsImage from "../../assets/indicators.png";
 
-import { SNACKBAR_DIRECTION } from "../../constants/default_settings";
+import {
+  SNACKBAR_DIRECTION,
+  DATE_MIN_FILTER,
+  DATE_MAX_FILTER,
+} from "../../constants/default_settings";
 import useToast from "../../hooks/useToast";
 
 function IndicatorCard({ image, title, subtitle }) {
@@ -43,10 +52,19 @@ function IndicatorCard({ image, title, subtitle }) {
 function DashboardContainer() {
   const { open, error, setError, showToast, hideToast } = useToast();
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const [userRecipe, setUserRecipe] = useState();
   const [budget, setBudget] = useState();
   const [monthFilter, setMonthFilter] = useState(moment().format("MM"));
   const [yearFilter, setYearFilter] = useState(moment().format("YYYY"));
+  // form de data -> alterar depois
+  const [fullDate, setFullDate] = useState(new Date());
 
   useEffect(() => {
     async function getUserRecipe() {
@@ -73,7 +91,13 @@ function DashboardContainer() {
 
     getUserRecipe();
     getBudget();
-  }, []);
+  }, [monthFilter]);
+
+  function updateDateFilter(dateParam) {
+    setFullDate(dateParam);
+    setMonthFilter(moment(dateParam).format("MM"));
+    setYearFilter(moment(dateParam).format("YYYY"));
+  }
 
   return (
     <Grid
@@ -94,6 +118,43 @@ function DashboardContainer() {
           {error}
         </Alert>
       </Snackbar>
+
+      <Grid sx={{ marginLeft: 15, marginRight: 15, marginBottom: 2 }}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Selecione a data"
+            inputProps={{ "data-testid": "dateFilter" }}
+            views={["year", "month"]}
+            minDate={DATE_MIN_FILTER}
+            maxDate={DATE_MAX_FILTER}
+            inputFormat="MM/yyyy"
+            value={fullDate}
+            onChange={(dateParam) => {
+              updateDateFilter(dateParam);
+            }}
+            renderInput={(params) => (
+              <TextField
+                inputProps={{ "data-testid": "dateFilter" }}
+                {...params}
+              />
+            )}
+          />
+
+          {/* <TextField
+            fullWidth
+            id="firstName"
+            label="First Name"
+            inputProps={{ "data-testid": "firstName" }}
+            error={Boolean(errors.firstName)}
+            helperText={errors.firstName && REQUIRED_MESSAGE}
+            {...register("firstName", {
+              required: true,
+              maxLength: 20,
+            })}
+          /> */}
+        </LocalizationProvider>
+      </Grid>
+
       <Grid
         display="flex"
         flexDirection="row"
