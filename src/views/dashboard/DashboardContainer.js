@@ -6,6 +6,7 @@ import {
   Grid,
   Card,
   CardContent,
+  CardActions,
   CardMedia,
   Typography,
   Alert,
@@ -16,6 +17,11 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import ViewListToggle from "../../components/ViewListToggle";
+import { EarningTable } from "../earnings/EarningTable";
+import { EarningList } from "../earnings/EarningList";
+import { THEME_COLOR } from "../../constants/default_settings";
+import useView from "../../hooks/useView";
 import earningImage from "../../assets/earnings.jpg";
 import expensesImage from "../../assets/expenses.jpg";
 import indicatorsImage from "../../assets/indicators.png";
@@ -26,6 +32,28 @@ import {
   DATE_MAX_FILTER,
 } from "../../constants/default_settings";
 import useToast from "../../hooks/useToast";
+
+function createData(name, author, pages, genre) {
+  return { name, author, pages, genre };
+}
+
+const rows = [
+  createData("Jogos Vorazes", "Suzanne Collins", 320, "Trilogia"),
+  createData(
+    "Harry Potter e a Pedra Filosofal",
+    "J.K Rowling",
+    220,
+    "Trilogia"
+  ),
+  createData("Me poupe!", "Nathalia Arcuri", 200, "Finanças"),
+  createData("Sherlock Homes", "Arthur Conan Doyle", 500, "Suspense"),
+  createData(
+    "O mistério dos sete relógios",
+    "Agatha Christie",
+    300,
+    "Suspense"
+  ),
+];
 
 function IndicatorCard({ image, title, subtitle }) {
   return (
@@ -51,6 +79,7 @@ function IndicatorCard({ image, title, subtitle }) {
 
 function DashboardContainer() {
   const { open, error, setError, showToast, hideToast } = useToast();
+  const [isTable, isList, switchFormat] = useView();
 
   const {
     register,
@@ -65,6 +94,8 @@ function DashboardContainer() {
   const [yearFilter, setYearFilter] = useState(moment().format("YYYY"));
   // form de data -> alterar depois
   const [fullDate, setFullDate] = useState(new Date());
+
+  console.log("budget", budget);
 
   useEffect(() => {
     async function getUserRecipe() {
@@ -139,19 +170,6 @@ function DashboardContainer() {
               />
             )}
           />
-
-          {/* <TextField
-            fullWidth
-            id="firstName"
-            label="First Name"
-            inputProps={{ "data-testid": "firstName" }}
-            error={Boolean(errors.firstName)}
-            helperText={errors.firstName && REQUIRED_MESSAGE}
-            {...register("firstName", {
-              required: true,
-              maxLength: 20,
-            })}
-          /> */}
         </LocalizationProvider>
       </Grid>
 
@@ -194,6 +212,38 @@ function DashboardContainer() {
           title={`${budget?.sum_percentage?.toFixed(2)}%`}
           subtitle="de gastos da receita de sucesso"
         />
+      </Grid>
+
+      <Grid
+        sx={{ marginLeft: 15, marginRight: 15, marginTop: 5, marginBottom: 5 }}
+      >
+        <Card>
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h1"
+              color={THEME_COLOR}
+            >
+              Ganhos
+            </Typography>
+
+            <ViewListToggle
+              isTable={isTable}
+              isList={isList}
+              switchFormat={switchFormat}
+            />
+
+            {isTable() && <EarningTable budget={budget} />}
+
+            {isList() && <EarningList budget={budget} />}
+          </CardContent>
+          <CardActions>
+            <Button size="small" href="/autores/novo">
+              Adicionar
+            </Button>
+          </CardActions>
+        </Card>
       </Grid>
     </Grid>
   );
