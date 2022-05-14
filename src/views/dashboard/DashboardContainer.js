@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-import { useForm } from "react-hook-form";
 import {
   Grid,
   Card,
@@ -20,6 +19,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import ViewListToggle from "../../components/ViewListToggle";
 import { EarningTable } from "../earnings/EarningTable";
 import { EarningList } from "../earnings/EarningList";
+import { ExpenseTable } from "../expenses/ExpenseTable";
+import { ExpenseList } from "../expenses/ExpenseList";
 import { THEME_COLOR } from "../../constants/default_settings";
 import useView from "../../hooks/useView";
 import earningImage from "../../assets/earnings.jpg";
@@ -55,6 +56,16 @@ const rows = [
   ),
 ];
 
+function useViewEarning() {
+  const [isTable, isList, switchFormat] = useView();
+  return [isTable, isList, switchFormat];
+}
+
+function useViewExpense() {
+  const [isTable, isList, switchFormat] = useView();
+  return [isTable, isList, switchFormat];
+}
+
 function IndicatorCard({ image, title, subtitle }) {
   return (
     <Card sx={{ width: "27%" }} data-testid="indicator-card">
@@ -78,21 +89,16 @@ function IndicatorCard({ image, title, subtitle }) {
 }
 
 function DashboardContainer() {
+  // custom hooks
   const { open, error, setError, showToast, hideToast } = useToast();
-  const [isTable, isList, switchFormat] = useView();
+  const [isTableEarning, isListEarning, switchFormatEarning] = useViewEarning();
+  const [isTableExpense, isListExpense, switchFormatExpense] = useViewEarning();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
+  // local states
   const [userRecipe, setUserRecipe] = useState();
   const [budget, setBudget] = useState();
   const [monthFilter, setMonthFilter] = useState(moment().format("MM"));
   const [yearFilter, setYearFilter] = useState(moment().format("YYYY"));
-  // form de data -> alterar depois
   const [fullDate, setFullDate] = useState(new Date());
 
   console.log("budget", budget);
@@ -229,14 +235,46 @@ function DashboardContainer() {
             </Typography>
 
             <ViewListToggle
-              isTable={isTable}
-              isList={isList}
-              switchFormat={switchFormat}
+              isTable={isTableEarning}
+              isList={isListEarning}
+              switchFormat={switchFormatEarning}
             />
 
-            {isTable() && <EarningTable budget={budget} />}
+            {isTableEarning() && <EarningTable budget={budget} />}
 
-            {isList() && <EarningList budget={budget} />}
+            {isListEarning() && <EarningList budget={budget} />}
+          </CardContent>
+          <CardActions>
+            <Button size="small" href="/autores/novo">
+              Adicionar
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+
+      <Grid
+        sx={{ marginLeft: 15, marginRight: 15, marginTop: 5, marginBottom: 5 }}
+      >
+        <Card>
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h1"
+              color={THEME_COLOR}
+            >
+              Despesas
+            </Typography>
+
+            <ViewListToggle
+              isTable={isTableExpense}
+              isList={isListExpense}
+              switchFormat={switchFormatExpense}
+            />
+
+            {isTableExpense() && <ExpenseTable budget={budget} />}
+
+            {isListExpense() && <ExpenseList budget={budget} />}
           </CardContent>
           <CardActions>
             <Button size="small" href="/autores/novo">
