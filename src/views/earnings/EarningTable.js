@@ -24,7 +24,7 @@ export function EarningTable({ budget }) {
         <TableBody>
           {budget?.Earnings.map((row) => {
             return (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} data-testid="row-table">
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.UserEarning.value}</TableCell>
                 <TableCell>

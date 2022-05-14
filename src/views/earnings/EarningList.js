@@ -18,7 +18,7 @@ export function EarningList({ budget }) {
       {budget?.Earnings.map((row) => {
         return (
           <Grid item xs={4} key={row.id}>
-            <Card>
+            <Card data-testid="card-item">
               <CardContent>
                 <Typography variant="h6" component="div" color="text.secondary">
                   {row.name}
