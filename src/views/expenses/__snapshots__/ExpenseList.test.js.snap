@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expense List should generate snapshot 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 css-gj1fbr-MuiGrid-root"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+        data-testid="card-item"
+      >
+        <div
+          class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+        >
+          <div
+            class="MuiTypography-root MuiTypography-h6 css-1jgmn5n-MuiTypography-root"
+          >
+            Internet
+          </div>
+          <ul
+            class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+            variant="body2"
+          >
+            <li
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+            >
+              <div
+                class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  Essencial
+                </p>
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+            >
+              <div
+                class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  R$ 
+                  300
+                </p>
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+            >
+              <div
+                class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  14/05/2022
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 css-gj1fbr-MuiGrid-root"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+        data-testid="card-item"
+      >
+        <div
+          class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+        >
+          <div
+            class="MuiTypography-root MuiTypography-h6 css-1jgmn5n-MuiTypography-root"
+          >
+            Camisetas
+          </div>
+          <ul
+            class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+            variant="body2"
+          >
+            <li
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+            >
+              <div
+                class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  Livre estou
+                </p>
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+            >
+              <div
+                class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  R$ 
+                  90
+                </p>
+              </div>
+            </li>
+            <li
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-1p823my-MuiListItem-root"
+            >
+              <div
+                class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  14/05/2022
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
