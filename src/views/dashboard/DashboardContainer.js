@@ -17,6 +17,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import ViewListToggle from "../../components/ViewListToggle";
+import { BarChartComparative } from "../../components/ChartWrapper";
 import { EarningTable } from "../earnings/EarningTable";
 import { EarningList } from "../earnings/EarningList";
 import { ExpenseTable } from "../expenses/ExpenseTable";
@@ -73,7 +74,7 @@ function IndicatorCard({ image, title, subtitle }) {
         component="img"
         height="140"
         image={image}
-        alt="green iguana"
+        alt={subtitle}
         sx={{ objectFit: "initial" }}
       />
       <CardContent>
@@ -92,7 +93,7 @@ function DashboardContainer() {
   // custom hooks
   const { open, error, setError, showToast, hideToast } = useToast();
   const [isTableEarning, isListEarning, switchFormatEarning] = useViewEarning();
-  const [isTableExpense, isListExpense, switchFormatExpense] = useViewEarning();
+  const [isTableExpense, isListExpense, switchFormatExpense] = useViewExpense();
 
   // local states
   const [userRecipe, setUserRecipe] = useState();
@@ -281,6 +282,38 @@ function DashboardContainer() {
               Adicionar
             </Button>
           </CardActions>
+        </Card>
+      </Grid>
+
+      <Grid
+        sx={{ marginLeft: 15, marginRight: 15, marginTop: 5, marginBottom: 5 }}
+      >
+        <Card>
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h1"
+              color={THEME_COLOR}
+            >
+              Receita do sucesso
+            </Typography>
+
+            <BarChartComparative
+              data={budget?.recipe_comparative || []}
+              labelProperty="name"
+              mainConfig={{
+                legend: "Esperado (%)",
+                backgroundColor: "rgba(53, 162, 235, 0.5)",
+                valueProperty: "percentage",
+              }}
+              secondConfig={{
+                legend: "Gasto (%)",
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                valueProperty: "percentage_spent",
+              }}
+            />
+          </CardContent>
         </Card>
       </Grid>
     </Grid>
