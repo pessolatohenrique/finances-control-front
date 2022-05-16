@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-function useView() {
-  const [format, setFormat] = useState("table");
+function useView(initial = "table") {
+  const [format, setFormat] = useState(initial);
 
   function switchFormat(format) {
     setFormat(format);

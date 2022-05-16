@@ -22,6 +22,7 @@ import { EarningTable } from "../earnings/EarningTable";
 import { EarningList } from "../earnings/EarningList";
 import { ExpenseTable } from "../expenses/ExpenseTable";
 import { ExpenseList } from "../expenses/ExpenseList";
+import { RecipeTable } from "../recipe/RecipeTable";
 import { THEME_COLOR } from "../../constants/default_settings";
 import useView from "../../hooks/useView";
 import earningImage from "../../assets/earnings.jpg";
@@ -39,31 +40,8 @@ function createData(name, author, pages, genre) {
   return { name, author, pages, genre };
 }
 
-const rows = [
-  createData("Jogos Vorazes", "Suzanne Collins", 320, "Trilogia"),
-  createData(
-    "Harry Potter e a Pedra Filosofal",
-    "J.K Rowling",
-    220,
-    "Trilogia"
-  ),
-  createData("Me poupe!", "Nathalia Arcuri", 200, "Finanças"),
-  createData("Sherlock Homes", "Arthur Conan Doyle", 500, "Suspense"),
-  createData(
-    "O mistério dos sete relógios",
-    "Agatha Christie",
-    300,
-    "Suspense"
-  ),
-];
-
-function useViewEarning() {
-  const [isTable, isList, switchFormat] = useView();
-  return [isTable, isList, switchFormat];
-}
-
-function useViewExpense() {
-  const [isTable, isList, switchFormat] = useView();
+function useViewWrapper(initial = "table") {
+  const [isTable, isList, switchFormat] = useView(initial);
   return [isTable, isList, switchFormat];
 }
 
@@ -92,8 +70,11 @@ function IndicatorCard({ image, title, subtitle }) {
 function DashboardContainer() {
   // custom hooks
   const { open, error, setError, showToast, hideToast } = useToast();
-  const [isTableEarning, isListEarning, switchFormatEarning] = useViewEarning();
-  const [isTableExpense, isListExpense, switchFormatExpense] = useViewExpense();
+  const [isTableEarning, isListEarning, switchFormatEarning] = useViewWrapper();
+  const [isTableExpense, isListExpense, switchFormatExpense] = useViewWrapper();
+  const [isTableRecipe, isListRecipe, switchFormatRecipe] = useViewWrapper(
+    "list"
+  );
 
   // local states
   const [userRecipe, setUserRecipe] = useState();
@@ -299,20 +280,30 @@ function DashboardContainer() {
               Receita do sucesso
             </Typography>
 
-            <BarChartComparative
-              data={budget?.recipe_comparative || []}
-              labelProperty="name"
-              mainConfig={{
-                legend: "Esperado (%)",
-                backgroundColor: "rgba(53, 162, 235, 0.5)",
-                valueProperty: "percentage",
-              }}
-              secondConfig={{
-                legend: "Gasto (%)",
-                backgroundColor: "rgba(255, 99, 132, 0.5)",
-                valueProperty: "percentage_spent",
-              }}
+            <ViewListToggle
+              isTable={isTableRecipe}
+              isList={isListRecipe}
+              switchFormat={switchFormatRecipe}
             />
+
+            {isTableRecipe() && <RecipeTable budget={budget} />}
+
+            {isListRecipe() && (
+              <BarChartComparative
+                data={budget?.recipe_comparative || []}
+                labelProperty="name"
+                mainConfig={{
+                  legend: "Esperado (%)",
+                  backgroundColor: "rgba(53, 162, 235, 0.5)",
+                  valueProperty: "percentage",
+                }}
+                secondConfig={{
+                  legend: "Gasto (%)",
+                  backgroundColor: "rgba(255, 99, 132, 0.5)",
+                  valueProperty: "percentage_spent",
+                }}
+              />
+            )}
           </CardContent>
         </Card>
       </Grid>
