@@ -60,7 +60,7 @@ exports[`Expense List should generate snapshot 1`] = `
                 <p
                   class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
                 >
-                  14/05/2022
+                  17/05/2022
                 </p>
               </div>
             </li>
@@ -123,7 +123,7 @@ exports[`Expense List should generate snapshot 1`] = `
                 <p
                   class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
                 >
-                  14/05/2022
+                  17/05/2022
                 </p>
               </div>
             </li>

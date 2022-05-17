@@ -54,7 +54,7 @@ exports[`Earning Table should generate snapshot 1`] = `
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
           >
-            14/05/2022
+            17/05/2022
           </td>
         </tr>
         <tr
@@ -74,7 +74,7 @@ exports[`Earning Table should generate snapshot 1`] = `
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
           >
-            14/05/2022
+            17/05/2022
           </td>
         </tr>
       </tbody>

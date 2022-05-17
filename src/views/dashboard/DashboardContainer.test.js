@@ -11,6 +11,8 @@ import DashboardContainer from "./DashboardContainer";
 
 describe("Dashboard Container", () => {
   beforeAll(() => {
+    console.log("JEST", process.env.JEST_WORKER_ID);
+
     render(<App />);
     const submitBtn = screen.getByTestId("submit-button");
     const username = screen.getByTestId("username");

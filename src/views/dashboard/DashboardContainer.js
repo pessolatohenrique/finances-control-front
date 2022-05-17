@@ -83,8 +83,6 @@ function DashboardContainer() {
   const [yearFilter, setYearFilter] = useState(moment().format("YYYY"));
   const [fullDate, setFullDate] = useState(new Date());
 
-  console.log("budget", budget);
-
   useEffect(() => {
     async function getUserRecipe() {
       try {
@@ -288,7 +286,7 @@ function DashboardContainer() {
 
             {isTableRecipe() && <RecipeTable budget={budget} />}
 
-            {isListRecipe() && (
+            {isListRecipe() && !process.env.JEST_WORKER_ID && (
               <BarChartComparative
                 data={budget?.recipe_comparative || []}
                 labelProperty="name"
