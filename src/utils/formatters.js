@@ -10,3 +10,17 @@ export function formatCpf(valueToFormat) {
 export function formatCpfToString(valueToFormat) {
   return valueToFormat.replace(/[^0-9]/g, "");
 }
+
+export function formatMoneyToDecimal(strMoney) {
+  let formatedValue = strMoney;
+
+  if (strMoney && strMoney.toString().includes("R$")) {
+    formatedValue = strMoney
+      .replace(/\./g, "")
+      .replace(",", ".")
+      .replace("R$", "")
+      .trim();
+  }
+
+  return formatedValue;
+}
