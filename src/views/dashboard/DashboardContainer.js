@@ -225,7 +225,7 @@ function DashboardContainer() {
             {isListEarning() && <EarningList budget={budget} />}
           </CardContent>
           <CardActions>
-            <Button size="small" href="/autores/novo">
+            <Button size="small" href="/ganho/novo">
               Adicionar
             </Button>
           </CardActions>

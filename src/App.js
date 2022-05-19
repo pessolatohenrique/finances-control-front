@@ -11,6 +11,7 @@ import LoginForm from "./views/register/LoginForm";
 import RegisterContainer from "./views/register/RegisterContainer";
 import DashboardContainer from "./views/dashboard/DashboardContainer";
 import RecipeContainer from "./views/recipe/RecipeContainer";
+import EarningForm from "./views/earnings/EarningForm";
 
 function App(props) {
   const { token, setToken, setRefreshToken } = useToken();
@@ -34,6 +35,10 @@ function App(props) {
 
         <Route exact path="/usuario/novo">
           <RegisterContainer />
+        </Route>
+
+        <Route exact path="/ganho/novo">
+          <EarningForm />
         </Route>
 
         <Route exact path="/livros">

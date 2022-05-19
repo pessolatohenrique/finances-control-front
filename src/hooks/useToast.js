@@ -3,9 +3,11 @@ import { useState } from "react";
 function useToast() {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
+  const [messageType, setMessageType] = useState();
 
-  function showToast() {
+  function showToast(type = "error") {
     setOpen(true);
+    setMessageType(type);
   }
 
   function hideToast() {
@@ -15,6 +17,7 @@ function useToast() {
   return {
     open,
     error,
+    messageType,
     setError,
     showToast,
     hideToast,
