@@ -25,7 +25,7 @@ exports[`Dashboard Container should generate snapshot 1`] = `
         >
           <input
             aria-invalid="false"
-            aria-label="Choose date, selected date is May 19, 2022"
+            aria-label="Choose date, selected date is May 20, 2022"
             aria-readonly="true"
             class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
             id="mui-1"

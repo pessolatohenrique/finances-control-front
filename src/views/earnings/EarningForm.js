@@ -87,6 +87,7 @@ function EarningForm() {
           anchorOrigin={SNACKBAR_DIRECTION}
           open={open}
           autoHideDuration={6000}
+          data-testid="snackbar"
           onClose={hideToast}
         >
           <Alert
