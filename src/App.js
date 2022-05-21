@@ -41,6 +41,10 @@ function App(props) {
           <EarningForm />
         </Route>
 
+        <Route exact path="/ganho/:id">
+          <EarningForm />
+        </Route>
+
         <Route exact path="/livros">
           <ExampleList />
         </Route>

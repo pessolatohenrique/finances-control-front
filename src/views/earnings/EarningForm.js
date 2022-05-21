@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   Container,
   Card,
@@ -41,6 +42,28 @@ function EarningForm() {
     defaultValues: RESET_FIELDS,
   });
 
+  const { id } = useParams();
+
+  useEffect(async () => {
+    async function loadData() {
+      try {
+        const response = await axios.get(`/user_earning/${id}`);
+        return response?.data;
+      } catch (error) {}
+    }
+
+    if (id) {
+      const data = await loadData();
+      const value = data?.Users[0]?.UserEarning?.value;
+      const transaction_date = moment(
+        data?.Users[0]?.UserEarning?.transaction_date,
+        "YYYY-MM-DD"
+      );
+
+      reset({ name: data.name, value, transaction_date });
+    }
+  }, []);
+
   const {
     open,
     error,
@@ -52,6 +75,16 @@ function EarningForm() {
 
   const formatDataSubmit = (data) => {
     const { transaction_date, value } = data;
+
+    if (id) {
+      return {
+        ...data,
+        value: parseFloat(formatMoneyToDecimal(value)),
+        transaction_date: moment(transaction_date, "DD/MM/YYYY").format(
+          "YYYY-MM-DD"
+        ),
+      };
+    }
 
     return {
       earnings: [
@@ -67,11 +100,20 @@ function EarningForm() {
     };
   };
 
+  const verifyOperation = async (dataSubmit) => {
+    if (id) {
+      await axios.put(`/user_earning/${id}`, { ...dataSubmit });
+      return;
+    }
+
+    await axios.post(`/user_earning`, { ...dataSubmit });
+    reset(RESET_FIELDS);
+  };
+
   const onSubmit = async (data) => {
     try {
       const dataSubmit = formatDataSubmit(data);
-      await axios.post(`/user_earning`, { ...dataSubmit });
-      reset(RESET_FIELDS);
+      await verifyOperation(dataSubmit);
       showToast("success");
       setError("Ganho salvo com sucesso!");
     } catch (error) {
