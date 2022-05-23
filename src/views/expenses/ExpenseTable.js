@@ -25,14 +25,14 @@ export function ExpenseTable({ budget }) {
         <TableBody>
           {budget?.Expenses.map((row) => {
             return (
-              <TableRow key={row.id} data-testid="row-table">
-                <TableCell>{row.name}</TableCell>
+              <TableRow key={row?.id} data-testid="row-table">
+                <TableCell>{row?.Expense?.name}</TableCell>
                 <TableCell>
-                  {row?.userExpenseCategory?.Category?.name}
+                  {row?.Expense?.userExpenseCategory?.Category?.name}
                 </TableCell>
-                <TableCell>{row.UserExpense.value}</TableCell>
+                <TableCell>{row?.value}</TableCell>
                 <TableCell>
-                  {moment(row.UserExpense.transaction_date).format(
+                  {moment(row?.UserExpense?.transaction_date).format(
                     "DD/MM/YYYY"
                   )}
                 </TableCell>

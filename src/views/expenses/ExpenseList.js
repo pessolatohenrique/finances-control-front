@@ -15,25 +15,23 @@ export function ExpenseList({ budget }) {
     <Grid container spacing={2}>
       {budget?.Expenses.map((row) => {
         return (
-          <Grid item xs={4} key={row.id}>
+          <Grid item xs={4} key={row?.id}>
             <Card data-testid="card-item">
               <CardContent>
                 <Typography variant="h6" component="div" color="text.secondary">
-                  {row.name}
+                  {row?.Expense?.name}
                 </Typography>
                 <List variant="body2">
                   <ListItem>
                     <ListItemText disableTypography>
                       <Typography variant="body2">
-                        {row?.userExpenseCategory?.Category?.name}
+                        {row?.Expense?.userExpenseCategory?.Category?.name}
                       </Typography>
                     </ListItemText>
                   </ListItem>
                   <ListItem>
                     <ListItemText disableTypography>
-                      <Typography variant="body2">
-                        R$ {row?.UserExpense?.value}
-                      </Typography>
+                      <Typography variant="body2">R$ {row?.value}</Typography>
                     </ListItemText>
                   </ListItem>
                   <ListItem>
