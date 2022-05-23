@@ -54,13 +54,9 @@ function EarningForm() {
 
     if (id) {
       const data = await loadData();
-      const value = data?.Users[0]?.UserEarning?.value;
-      const transaction_date = moment(
-        data?.Users[0]?.UserEarning?.transaction_date,
-        "YYYY-MM-DD"
-      );
+      const transaction_date = moment(data.transaction_date, "YYYY-MM-DD");
 
-      reset({ name: data.name, value, transaction_date });
+      reset({ name: data?.Earning.name, value: data?.value, transaction_date });
     }
   }, []);
 
@@ -145,7 +141,7 @@ function EarningForm() {
           <CardContent>
             <BreadcrumbsWrapper
               parentLink={{ link: "/", label: "Dashboard" }}
-              childrenLabel="Novo"
+              childrenLabel={id ? "Editar" : "Novo"}
             />
             <Typography
               gutterBottom
@@ -153,7 +149,7 @@ function EarningForm() {
               component="h1"
               color={THEME_COLOR}
             >
-              Novo Ganho
+              {id ? "Editar" : "Novo"} Ganho
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container direction={"column"} spacing={2}>

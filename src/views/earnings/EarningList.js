@@ -21,20 +21,18 @@ export function EarningList({ budget }) {
             <Card data-testid="card-item">
               <CardContent>
                 <Typography variant="h6" component="div" color="text.secondary">
-                  {row.name}
+                  {row?.Earning?.name}
                 </Typography>
                 <List variant="body2">
                   <ListItem>
                     <ListItemText disableTypography>
-                      <Typography variant="body2">
-                        R$ {row.UserEarning.value}
-                      </Typography>
+                      <Typography variant="body2">R$ {row?.value}</Typography>
                     </ListItemText>
                   </ListItem>
                   <ListItem>
                     <ListItemText disableTypography>
                       <Typography variant="body2">
-                        {moment(row.UserEarning.transaction_date).format(
+                        {moment(row?.UserEarning?.transaction_date).format(
                           "DD/MM/YYYY"
                         )}
                       </Typography>
