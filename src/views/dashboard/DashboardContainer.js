@@ -16,6 +16,11 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import {
+  MODAL_CONFIRM_TITLE,
+  MODAL_CONFIRM_SUBTITLE,
+} from "../../constants/messages";
+import ModalWrapper from "../../components/ModalWrapper";
 import ViewListToggle from "../../components/ViewListToggle";
 import { BarChartComparative } from "../../components/ChartWrapper";
 import { EarningTable } from "../earnings/EarningTable";
@@ -83,29 +88,33 @@ function DashboardContainer() {
   const [yearFilter, setYearFilter] = useState(moment().format("YYYY"));
   const [fullDate, setFullDate] = useState(new Date());
 
+  // modal
+  const [showModal, setShowModal] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
+
+  async function getUserRecipe() {
+    try {
+      const response = await axios.get(
+        `budget/summarize?month=${monthFilter}&year=${yearFilter}`
+      );
+      setBudget(response.data);
+    } catch (error) {
+      showToast();
+      setError(error?.response?.data?.message || null);
+    }
+  }
+
+  async function getBudget() {
+    try {
+      const response = await axios.get(`/user/recipe`);
+      setUserRecipe(response.data);
+    } catch (error) {
+      showToast();
+      setError(error?.response?.data?.message || null);
+    }
+  }
+
   useEffect(() => {
-    async function getUserRecipe() {
-      try {
-        const response = await axios.get(
-          `budget/summarize?month=${monthFilter}&year=${yearFilter}`
-        );
-        setBudget(response.data);
-      } catch (error) {
-        showToast();
-        setError(error?.response?.data?.message || null);
-      }
-    }
-
-    async function getBudget() {
-      try {
-        const response = await axios.get(`/user/recipe`);
-        setUserRecipe(response.data);
-      } catch (error) {
-        showToast();
-        setError(error?.response?.data?.message || null);
-      }
-    }
-
     getUserRecipe();
     getBudget();
   }, [monthFilter]);
@@ -135,6 +144,24 @@ function DashboardContainer() {
           {error}
         </Alert>
       </Snackbar>
+
+      {showModal && (
+        <ModalWrapper
+          isOpen={showModal}
+          title={MODAL_CONFIRM_TITLE}
+          subtitle={MODAL_CONFIRM_SUBTITLE}
+          hasConfirmButton
+          handleClose={() => {
+            setSelectedId("");
+            setShowModal(false);
+          }}
+          endpoint={{
+            method: "delete",
+            name: `/user_earning/${selectedId}`,
+          }}
+          callbackMethod={() => getUserRecipe()}
+        />
+      )}
 
       <Grid sx={{ marginLeft: 15, marginRight: 15, marginBottom: 2 }}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -220,7 +247,13 @@ function DashboardContainer() {
               switchFormat={switchFormatEarning}
             />
 
-            {isTableEarning() && <EarningTable budget={budget} />}
+            {isTableEarning() && (
+              <EarningTable
+                budget={budget}
+                onShowModal={() => setShowModal(true)}
+                onSetSelectedId={(id) => setSelectedId(id)}
+              />
+            )}
 
             {isListEarning() && <EarningList budget={budget} />}
           </CardContent>
