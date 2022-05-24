@@ -89,8 +89,10 @@ function DashboardContainer() {
   const [fullDate, setFullDate] = useState(new Date());
 
   // modal
-  const [showModal, setShowModal] = useState(false);
-  const [selectedId, setSelectedId] = useState("");
+  const [showModalEarning, setShowModalEarning] = useState(false);
+  const [selectedIdEarning, setSelectedIdEarning] = useState("");
+  const [showModalExpense, setShowModalExpense] = useState(false);
+  const [selectedIdExpense, setSelectedIdExpense] = useState("");
 
   async function getUserRecipe() {
     try {
@@ -145,19 +147,37 @@ function DashboardContainer() {
         </Alert>
       </Snackbar>
 
-      {showModal && (
+      {showModalEarning && (
         <ModalWrapper
-          isOpen={showModal}
+          isOpen={showModalEarning}
           title={MODAL_CONFIRM_TITLE}
           subtitle={MODAL_CONFIRM_SUBTITLE}
           hasConfirmButton
           handleClose={() => {
-            setSelectedId("");
-            setShowModal(false);
+            setSelectedIdEarning("");
+            setShowModalEarning(false);
           }}
           endpoint={{
             method: "delete",
-            name: `/user_earning/${selectedId}`,
+            name: `/user_earning/${selectedIdEarning}`,
+          }}
+          callbackMethod={() => getUserRecipe()}
+        />
+      )}
+
+      {showModalExpense && (
+        <ModalWrapper
+          isOpen={showModalExpense}
+          title={MODAL_CONFIRM_TITLE}
+          subtitle={MODAL_CONFIRM_SUBTITLE}
+          hasConfirmButton
+          handleClose={() => {
+            setSelectedIdExpense("");
+            setShowModalExpense(false);
+          }}
+          endpoint={{
+            method: "delete",
+            name: `/user_expense/${selectedIdExpense}`,
           }}
           callbackMethod={() => getUserRecipe()}
         />
@@ -250,8 +270,8 @@ function DashboardContainer() {
             {isTableEarning() && (
               <EarningTable
                 budget={budget}
-                onShowModal={() => setShowModal(true)}
-                onSetSelectedId={(id) => setSelectedId(id)}
+                onShowModal={() => setShowModalEarning(true)}
+                onSetSelectedId={(id) => setSelectedIdEarning(id)}
               />
             )}
 
@@ -285,12 +305,18 @@ function DashboardContainer() {
               switchFormat={switchFormatExpense}
             />
 
-            {isTableExpense() && <ExpenseTable budget={budget} />}
+            {isTableExpense() && (
+              <ExpenseTable
+                budget={budget}
+                onShowModal={() => setShowModalExpense(true)}
+                onSetSelectedId={(id) => setSelectedIdExpense(id)}
+              />
+            )}
 
             {isListExpense() && <ExpenseList budget={budget} />}
           </CardContent>
           <CardActions>
-            <Button size="small" href="/autores/novo">
+            <Button size="small" href="/gasto/novo">
               Adicionar
             </Button>
           </CardActions>
