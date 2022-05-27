@@ -12,7 +12,11 @@ import {
   Button,
   Snackbar,
   TextField,
+  Box,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -52,13 +56,13 @@ function useViewWrapper(initial = "table") {
 
 function IndicatorCard({ image, title, subtitle }) {
   return (
-    <Card sx={{ width: "27%" }} data-testid="indicator-card">
+    <Card data-testid="indicator-card">
       <CardMedia
         component="img"
         height="140"
         image={image}
         alt={subtitle}
-        sx={{ objectFit: "initial" }}
+        sx={{ objectFit: "cover" }}
       />
       <CardContent>
         <Typography variant="h5" component="div">
@@ -71,6 +75,14 @@ function IndicatorCard({ image, title, subtitle }) {
     </Card>
   );
 }
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 function DashboardContainer() {
   // custom hooks
@@ -128,14 +140,13 @@ function DashboardContainer() {
   }
 
   return (
-    <Grid
+    <Box
       minHeight="100vh"
       sx={{
         backgroundColor: `#E5E5E5`,
         overflow: "hidden",
       }}
     >
-      <br />
       <Snackbar
         anchorOrigin={SNACKBAR_DIRECTION}
         open={open}
@@ -183,188 +194,253 @@ function DashboardContainer() {
         />
       )}
 
-      <Grid sx={{ marginLeft: 15, marginRight: 15, marginBottom: 2 }}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="Selecione a data"
-            inputProps={{ "data-testid": "dateFilter" }}
-            views={["year", "month"]}
-            minDate={DATE_MIN_FILTER}
-            maxDate={DATE_MAX_FILTER}
-            inputFormat="MM/yyyy"
-            value={fullDate}
-            onChange={(dateParam) => {
-              updateDateFilter(dateParam);
-            }}
-            renderInput={(params) => (
-              <TextField
-                inputProps={{ "data-testid": "dateFilter" }}
-                {...params}
-              />
-            )}
+      <Grid
+        container
+        marginLeft={2}
+        marginRight={2}
+        columnSpacing={3}
+        marginTop={3}
+        marginBottom={2}
+      >
+        <Grid item lg={3} md={3} sm={11} xs={11}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Selecione a data"
+              inputProps={{ "data-testid": "dateFilter" }}
+              views={["year", "month"]}
+              minDate={DATE_MIN_FILTER}
+              maxDate={DATE_MAX_FILTER}
+              inputFormat="MM/yyyy"
+              value={fullDate}
+              onChange={(dateParam) => {
+                updateDateFilter(dateParam);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  inputProps={{ "data-testid": "dateFilter" }}
+                  {...params}
+                />
+              )}
+            />
+          </LocalizationProvider>
+        </Grid>
+      </Grid>
+
+      {!userRecipe && (
+        <Grid
+          container
+          rowSpacing={{ xs: 3 }}
+          columnSpacing={3}
+          marginBottom={2}
+          marginLeft={2}
+          marginRight={2}
+          sx={{ width: "96%" }}
+        >
+          <Grid item lg={9} md={12} sm={12} xs={12}>
+            <Alert
+              severity="warning"
+              action={
+                <Button
+                  color="inherit"
+                  size="small"
+                  href="/receita/associar"
+                  data-testid="associate-button"
+                >
+                  <strong>{"Associar".toUpperCase()}</strong>
+                </Button>
+              }
+            >
+              Para receber dicas personalizadas, associe uma "receita do
+              sucesso"!
+            </Alert>
+          </Grid>
+        </Grid>
+      )}
+
+      <Grid
+        container
+        rowSpacing={{ xs: 3 }}
+        columnSpacing={3}
+        marginLeft={2}
+        marginRight={2}
+        marginBottom={3}
+        sx={{ width: "95%" }}
+      >
+        <Grid item lg={3} md={3} sm={6} xs={11}>
+          <IndicatorCard
+            image={earningImage}
+            title={`R$ ${budget?.sum_earning?.toFixed(2)}`}
+            subtitle="de ganhos"
           />
-        </LocalizationProvider>
+        </Grid>
+        <Grid item lg={3} md={3} sm={6} xs={11}>
+          <IndicatorCard
+            image={expensesImage}
+            title={`R$ ${budget?.sum_expense?.toFixed(2)}`}
+            subtitle="de gastos"
+          />
+        </Grid>
+        <Grid item lg={3} md={3} sm={6} xs={11}>
+          <IndicatorCard
+            image={indicatorsImage}
+            title={`${budget?.sum_percentage?.toFixed(2)}%`}
+            subtitle="de gastos da receita de sucesso"
+          />
+        </Grid>
+        {/* <Grid item lg={3} md={3} xs={11}>
+          <IndicatorCard
+            image={indicatorsImage}
+            title={`${budget?.sum_percentage?.toFixed(2)}%`}
+            subtitle="de gastos da receita de sucesso"
+          />
+        </Grid> */}
       </Grid>
 
       <Grid
-        display="flex"
-        flexDirection="row"
-        justifyContent="space-between"
-        sx={{ marginLeft: 15, marginRight: 15 }}
+        container
+        rowSpacing={{ xs: 3 }}
+        columnSpacing={3}
+        marginLeft={2}
+        marginRight={2}
+        marginTop={5}
+        marginBottom={3}
+        sx={{ width: "96%" }}
       >
-        {!userRecipe && (
-          <Alert
-            severity="warning"
-            action={
-              <Button
-                color="inherit"
-                size="small"
-                href="/receita/associar"
-                data-testid="associate-button"
+        <Grid item lg={12} md={12} sm={12} xs={11}>
+          <Card>
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h1"
+                color={THEME_COLOR}
               >
-                <strong>{"Associar".toUpperCase()}</strong>
+                Ganhos
+              </Typography>
+
+              <ViewListToggle
+                isTable={isTableEarning}
+                isList={isListEarning}
+                switchFormat={switchFormatEarning}
+              />
+
+              {isTableEarning() && (
+                <EarningTable
+                  budget={budget}
+                  onShowModal={() => setShowModalEarning(true)}
+                  onSetSelectedId={(id) => setSelectedIdEarning(id)}
+                />
+              )}
+
+              {isListEarning() && <EarningList budget={budget} />}
+            </CardContent>
+            <CardActions>
+              <Button size="small" href="/ganho/novo">
+                Adicionar
               </Button>
-            }
-          >
-            Para receber dicas personalizadas, associe uma "receita do sucesso"!
-          </Alert>
-        )}
-
-        <IndicatorCard
-          image={earningImage}
-          title={`R$ ${budget?.sum_earning?.toFixed(2)}`}
-          subtitle="de ganhos"
-        />
-        <IndicatorCard
-          image={expensesImage}
-          title={`R$ ${budget?.sum_expense?.toFixed(2)}`}
-          subtitle="de gastos"
-        />
-        <IndicatorCard
-          image={indicatorsImage}
-          title={`${budget?.sum_percentage?.toFixed(2)}%`}
-          subtitle="de gastos da receita de sucesso"
-        />
+            </CardActions>
+          </Card>
+        </Grid>
       </Grid>
 
       <Grid
-        sx={{ marginLeft: 15, marginRight: 15, marginTop: 5, marginBottom: 5 }}
+        container
+        rowSpacing={{ xs: 3 }}
+        columnSpacing={3}
+        marginLeft={2}
+        marginRight={2}
+        marginTop={3}
+        marginBottom={3}
+        sx={{ width: "96%" }}
       >
-        <Card>
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h1"
-              color={THEME_COLOR}
-            >
-              Ganhos
-            </Typography>
+        <Grid item lg={12} md={12} sm={12} xs={11}>
+          <Card>
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h1"
+                color={THEME_COLOR}
+              >
+                Despesas
+              </Typography>
 
-            <ViewListToggle
-              isTable={isTableEarning}
-              isList={isListEarning}
-              switchFormat={switchFormatEarning}
-            />
-
-            {isTableEarning() && (
-              <EarningTable
-                budget={budget}
-                onShowModal={() => setShowModalEarning(true)}
-                onSetSelectedId={(id) => setSelectedIdEarning(id)}
+              <ViewListToggle
+                isTable={isTableExpense}
+                isList={isListExpense}
+                switchFormat={switchFormatExpense}
               />
-            )}
 
-            {isListEarning() && <EarningList budget={budget} />}
-          </CardContent>
-          <CardActions>
-            <Button size="small" href="/ganho/novo">
-              Adicionar
-            </Button>
-          </CardActions>
-        </Card>
+              {isTableExpense() && (
+                <ExpenseTable
+                  budget={budget}
+                  onShowModal={() => setShowModalExpense(true)}
+                  onSetSelectedId={(id) => setSelectedIdExpense(id)}
+                />
+              )}
+
+              {isListExpense() && <ExpenseList budget={budget} />}
+            </CardContent>
+            <CardActions>
+              <Button size="small" href="/gasto/novo">
+                Adicionar
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
       </Grid>
 
       <Grid
-        sx={{ marginLeft: 15, marginRight: 15, marginTop: 5, marginBottom: 5 }}
+        container
+        rowSpacing={{ xs: 3 }}
+        columnSpacing={3}
+        marginLeft={2}
+        marginRight={2}
+        marginTop={3}
+        marginBottom={3}
+        sx={{ width: "96%" }}
       >
-        <Card>
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h1"
-              color={THEME_COLOR}
-            >
-              Despesas
-            </Typography>
+        <Grid item lg={12} md={12} sm={12} xs={11}>
+          <Card>
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h1"
+                color={THEME_COLOR}
+              >
+                Receita do sucesso
+              </Typography>
 
-            <ViewListToggle
-              isTable={isTableExpense}
-              isList={isListExpense}
-              switchFormat={switchFormatExpense}
-            />
-
-            {isTableExpense() && (
-              <ExpenseTable
-                budget={budget}
-                onShowModal={() => setShowModalExpense(true)}
-                onSetSelectedId={(id) => setSelectedIdExpense(id)}
+              <ViewListToggle
+                isTable={isTableRecipe}
+                isList={isListRecipe}
+                switchFormat={switchFormatRecipe}
               />
-            )}
 
-            {isListExpense() && <ExpenseList budget={budget} />}
-          </CardContent>
-          <CardActions>
-            <Button size="small" href="/gasto/novo">
-              Adicionar
-            </Button>
-          </CardActions>
-        </Card>
+              {isTableRecipe() && <RecipeTable budget={budget} />}
+
+              {isListRecipe() && !process.env.JEST_WORKER_ID && (
+                <BarChartComparative
+                  data={budget?.recipe_comparative || []}
+                  labelProperty="name"
+                  mainConfig={{
+                    legend: "Esperado (%)",
+                    backgroundColor: "rgba(53, 162, 235, 0.5)",
+                    valueProperty: "percentage",
+                  }}
+                  secondConfig={{
+                    legend: "Gasto (%)",
+                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                    valueProperty: "percentage_spent",
+                  }}
+                />
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
-
-      <Grid
-        sx={{ marginLeft: 15, marginRight: 15, marginTop: 5, marginBottom: 5 }}
-      >
-        <Card>
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h1"
-              color={THEME_COLOR}
-            >
-              Receita do sucesso
-            </Typography>
-
-            <ViewListToggle
-              isTable={isTableRecipe}
-              isList={isListRecipe}
-              switchFormat={switchFormatRecipe}
-            />
-
-            {isTableRecipe() && <RecipeTable budget={budget} />}
-
-            {isListRecipe() && !process.env.JEST_WORKER_ID && (
-              <BarChartComparative
-                data={budget?.recipe_comparative || []}
-                labelProperty="name"
-                mainConfig={{
-                  legend: "Esperado (%)",
-                  backgroundColor: "rgba(53, 162, 235, 0.5)",
-                  valueProperty: "percentage",
-                }}
-                secondConfig={{
-                  legend: "Gasto (%)",
-                  backgroundColor: "rgba(255, 99, 132, 0.5)",
-                  valueProperty: "percentage_spent",
-                }}
-              />
-            )}
-          </CardContent>
-        </Card>
-      </Grid>
-    </Grid>
+    </Box>
   );
 }
 
