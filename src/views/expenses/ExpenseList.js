@@ -37,9 +37,7 @@ export function ExpenseList({ budget }) {
                   <ListItem>
                     <ListItemText disableTypography>
                       <Typography variant="body2">
-                        {moment(row?.UserExpense?.transaction_date).format(
-                          "DD/MM/YYYY"
-                        )}
+                        {moment(row?.transaction_date).format("DD/MM/YYYY")}
                       </Typography>
                     </ListItemText>
                   </ListItem>

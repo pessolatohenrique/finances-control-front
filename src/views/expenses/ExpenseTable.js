@@ -57,9 +57,7 @@ export function ExpenseTable({ budget, onShowModal, onSetSelectedId }) {
                 </TableCell>
                 <TableCell>{row?.value}</TableCell>
                 <TableCell>
-                  {moment(row?.UserExpense?.transaction_date).format(
-                    "DD/MM/YYYY"
-                  )}
+                  {moment(row?.transaction_date).format("DD/MM/YYYY")}
                 </TableCell>
               </TableRow>
             );

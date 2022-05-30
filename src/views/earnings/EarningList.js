@@ -30,9 +30,7 @@ export function EarningList({ budget }) {
                   <ListItem>
                     <ListItemText disableTypography>
                       <Typography variant="body2">
-                        {moment(row?.UserEarning?.transaction_date).format(
-                          "DD/MM/YYYY"
-                        )}
+                        {moment(row?.transaction_date).format("DD/MM/YYYY")}
                       </Typography>
                     </ListItemText>
                   </ListItem>
