@@ -129,6 +129,17 @@ function LoginForm({ setToken, setRefreshToken }) {
                   >
                     Entrar
                   </Button>
+
+                  <Typography
+                    gutterBottom
+                    variant="p"
+                    component="p"
+                    //   color={THEME_COLOR}
+                  >
+                    <br />
+                    Ainda não tem uma conta? Cadastre-se{" "}
+                    <a href="/usuario/novo">aqui</a>
+                  </Typography>
                 </Grid>
               </Grid>
             </form>

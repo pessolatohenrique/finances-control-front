@@ -4,9 +4,6 @@ import { isPageWithoutLogin } from "./utils/pages";
 import useToken from "./hooks/useToken";
 import AppBarWrapper from "./components/AppBarWrapper";
 import NotFound from "./components/NotFound";
-import ExampleList from "./views/register/ExampleList";
-import ExampleForm from "./views/register/ExampleForm";
-import ExampleDetail from "./views/register/ExampleDetail";
 import LoginForm from "./views/register/LoginForm";
 import RegisterContainer from "./views/register/RegisterContainer";
 import DashboardContainer from "./views/dashboard/DashboardContainer";
@@ -52,18 +49,6 @@ function App(props) {
 
         <Route exact path="/gasto/:id">
           <ExpenseForm />
-        </Route>
-
-        <Route exact path="/livros">
-          <ExampleList />
-        </Route>
-
-        <Route exact path="/autores/novo">
-          <ExampleForm />
-        </Route>
-
-        <Route exact path="/livros/:id">
-          <ExampleDetail />
         </Route>
 
         <Route path="*">
