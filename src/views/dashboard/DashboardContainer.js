@@ -14,9 +14,6 @@ import {
   TextField,
   Box,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -24,20 +21,20 @@ import {
   MODAL_CONFIRM_TITLE,
   MODAL_CONFIRM_SUBTITLE,
 } from "../../constants/messages";
+import { THEME_COLOR } from "../../constants/default_settings";
 import ModalWrapper from "../../components/ModalWrapper";
 import ViewListToggle from "../../components/ViewListToggle";
 import { BarChartComparative } from "../../components/ChartWrapper";
-import { EarningTable } from "../earnings/EarningTable";
-import { EarningList } from "../earnings/EarningList";
-import { ExpenseTable } from "../expenses/ExpenseTable";
-import { ExpenseList } from "../expenses/ExpenseList";
-import { RecipeTable } from "../recipe/RecipeTable";
-import { THEME_COLOR } from "../../constants/default_settings";
 import useView from "../../hooks/useView";
 import earningImage from "../../assets/earnings.jpg";
 import expensesImage from "../../assets/expenses.jpg";
 import indicatorsImage from "../../assets/indicators.png";
 import indicatorsComingSoon from "../../assets/indicators.jpg";
+import { EarningTable } from "../earnings/EarningTable";
+import { EarningList } from "../earnings/EarningList";
+import { ExpenseTable } from "../expenses/ExpenseTable";
+import { ExpenseList } from "../expenses/ExpenseList";
+import { RecipeTable } from "../recipe/RecipeTable";
 
 import {
   SNACKBAR_DIRECTION,
@@ -45,10 +42,6 @@ import {
   DATE_MAX_FILTER,
 } from "../../constants/default_settings";
 import useToast from "../../hooks/useToast";
-
-function createData(name, author, pages, genre) {
-  return { name, author, pages, genre };
-}
 
 function useViewWrapper(initial = "table") {
   const [isTable, isList, switchFormat] = useView(initial);
@@ -257,7 +250,7 @@ function DashboardContainer() {
         marginLeft={2}
         marginRight={2}
         marginBottom={3}
-        sx={{ width: "95%" }}
+        sx={{ width: "96%" }}
       >
         <Grid item lg={3} md={3} sm={6} xs={11}>
           <IndicatorCard

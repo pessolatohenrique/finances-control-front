@@ -45,7 +45,7 @@ export function BarChartComparative({
   useEffect(() => {
     const mappedLabels = [...data].map((item) => item[labelProperty]);
     setLabels(mappedLabels);
-  }, [data]);
+  }, [data, labelProperty]);
 
   const dataObject = {
     labels,

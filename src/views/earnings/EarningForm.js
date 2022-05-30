@@ -44,7 +44,7 @@ function EarningForm() {
 
   const { id } = useParams();
 
-  useEffect(async () => {
+  useEffect(() => {
     async function loadData() {
       try {
         const response = await axios.get(`/user_earning/${id}`);
@@ -52,13 +52,21 @@ function EarningForm() {
       } catch (error) {}
     }
 
-    if (id) {
-      const data = await loadData();
-      const transaction_date = moment(data.transaction_date, "YYYY-MM-DD");
+    async function verifyUpdate() {
+      if (id) {
+        const data = await loadData();
+        const transaction_date = moment(data.transaction_date, "YYYY-MM-DD");
 
-      reset({ name: data?.Earning.name, value: data?.value, transaction_date });
+        reset({
+          name: data?.Earning.name,
+          value: data?.value,
+          transaction_date,
+        });
+      }
     }
-  }, []);
+
+    verifyUpdate();
+  }, [id, reset]);
 
   const {
     open,

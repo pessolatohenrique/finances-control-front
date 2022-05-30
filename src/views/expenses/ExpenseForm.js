@@ -55,7 +55,7 @@ function ExpenseForm() {
   const [categories, setCategories] = useState([]);
   const { id } = useParams();
 
-  useEffect(async () => {
+  useEffect(() => {
     async function loadData() {
       try {
         const response = await axios.get(`/user_expense/${id}`);
@@ -70,21 +70,25 @@ function ExpenseForm() {
       } catch (error) {}
     }
 
-    const categories = await loadCategories();
-    setCategories(categories);
+    async function verifyUpdate() {
+      const categories = await loadCategories();
+      setCategories(categories);
 
-    if (id) {
-      const data = await loadData();
-      const transaction_date = moment(data.transaction_date, "YYYY-MM-DD");
+      if (id) {
+        const data = await loadData();
+        const transaction_date = moment(data.transaction_date, "YYYY-MM-DD");
 
-      reset({
-        name: data?.Expense.name,
-        value: data?.value,
-        transaction_date,
-        categoryId: data?.categoryId,
-      });
+        reset({
+          name: data?.Expense.name,
+          value: data?.value,
+          transaction_date,
+          categoryId: data?.categoryId,
+        });
+      }
     }
-  }, []);
+
+    verifyUpdate();
+  }, [id, reset]);
 
   const {
     open,
