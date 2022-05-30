@@ -13,26 +13,27 @@ import {
 } from "@mui/material";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
-import BookIcon from "@material-ui/icons/Book";
-import PeopleIcon from "@material-ui/icons/People";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import MoneyOffIcon from "@material-ui/icons/MoneyOff";
 import { PROJECT_NAME } from "../constants/default_settings";
 import { isPageWithoutLogin } from "../utils/pages";
 
 const items = [
   {
-    table: "autores",
-    link: "autores",
-    icon: <PeopleIcon />,
+    table: "dashboard",
+    link: "",
+    icon: <DashboardIcon />,
   },
   {
-    table: "livros",
-    link: "livros",
-    icon: <BookIcon />,
+    table: "novo ganho",
+    link: "ganho/novo",
+    icon: <AttachMoneyIcon />,
   },
   {
-    table: "livros detalhes",
-    link: "livros/5",
-    icon: <BookIcon />,
+    table: "nova despesa",
+    link: "gasto/novo",
+    icon: <MoneyOffIcon />,
   },
 ];
 
