@@ -37,6 +37,7 @@ import useView from "../../hooks/useView";
 import earningImage from "../../assets/earnings.jpg";
 import expensesImage from "../../assets/expenses.jpg";
 import indicatorsImage from "../../assets/indicators.png";
+import indicatorsComingSoon from "../../assets/indicators.jpg";
 
 import {
   SNACKBAR_DIRECTION,
@@ -75,14 +76,6 @@ function IndicatorCard({ image, title, subtitle }) {
     </Card>
   );
 }
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 function DashboardContainer() {
   // custom hooks
@@ -287,13 +280,13 @@ function DashboardContainer() {
             subtitle="de gastos da receita de sucesso"
           />
         </Grid>
-        {/* <Grid item lg={3} md={3} xs={11}>
+        <Grid item lg={3} md={3} xs={11}>
           <IndicatorCard
-            image={indicatorsImage}
-            title={`${budget?.sum_percentage?.toFixed(2)}%`}
-            subtitle="de gastos da receita de sucesso"
+            image={indicatorsComingSoon}
+            title={`Em breve`}
+            subtitle="um novo recurso para você"
           />
-        </Grid> */}
+        </Grid>
       </Grid>
 
       <Grid
