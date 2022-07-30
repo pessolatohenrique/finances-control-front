@@ -114,6 +114,27 @@ function DashboardContainer() {
     }
   }
 
+  async function exportBudget() {
+    try {
+      const response = await axios.get(
+        `/budget/export?month=${monthFilter}&year=${yearFilter}`,
+        { responseType: "arraybuffer" }
+      );
+
+      const blob = new Blob([response.data], {
+        type:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      });
+
+      const url = window.URL.createObjectURL(blob);
+
+      window.open(url);
+    } catch (error) {
+      showToast();
+      setError(error?.response?.data?.message || null);
+    }
+  }
+
   useEffect(() => {
     getUserRecipe();
     getBudget();
@@ -324,6 +345,16 @@ function DashboardContainer() {
               <Button size="small" href="/ganho/novo">
                 Adicionar
               </Button>
+
+              <Button
+                size="small"
+                onClick={(event) => {
+                  event.preventDefault();
+                  exportBudget();
+                }}
+              >
+                Exportar para excel
+              </Button>
             </CardActions>
           </Card>
         </Grid>
@@ -370,6 +401,16 @@ function DashboardContainer() {
             <CardActions>
               <Button size="small" href="/gasto/novo">
                 Adicionar
+              </Button>
+
+              <Button
+                size="small"
+                onClick={(event) => {
+                  event.preventDefault();
+                  exportBudget();
+                }}
+              >
+                Exportar para excel
               </Button>
             </CardActions>
           </Card>
